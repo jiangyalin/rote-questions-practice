@@ -1,23 +1,17 @@
-const PENDING = 'pending'
-const RESOLVED = 'resolved'
-const REJECTED = 'rejected'
-
 class MyPromise {
   constructor (executor) {
     this.status = 'PENDING'
     this.onResolve = null
     this.onReject = null
     const resolve = (data) => {
-      if (this.status === 'PENDING') {
-        this.onResolve(data)
-        this.status = 'RESOLVED'
-      }
+      if (this.status !== 'PENDING') return
+      if (typeof this.onResolve === 'function') this.onResolve(data)
+      this.status = 'RESOLVED'
     }
     const reject = (data) => {
-      if (this.status === 'PENDING') {
-        this.onReject(data)
-        this.status = 'REJECTED'
-      }
+      if (this.status !== 'PENDING') return
+      if (typeof this.onReject === 'function') this.onReject(data)
+      this.status = 'REJECTED'
     }
     try {
       executor(resolve, reject)
@@ -27,11 +21,13 @@ class MyPromise {
   }
 
   then (fn) {
+    if (typeof fn !== 'function') return
     this.onResolve = fn
     return this
   }
 
   catch (fn) {
+    if (typeof fn !== 'function') return
     this.onReject = fn
     return this
   }
@@ -41,10 +37,6 @@ const test = new MyPromise((resolve, reject) => {
   setTimeout(() => {
     resolve('这是测试数据')
   }, 2000)
-
-  setTimeout(() => {
-    reject('err')
-  }, 1000)
 })
 
 test.then(res => {
