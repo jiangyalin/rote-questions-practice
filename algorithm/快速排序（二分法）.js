@@ -1,3 +1,6 @@
+/**
+ * 标记，需重做
+ * */
 const fastSort = (arr = [], left = 0, right = arr.length - 1) => {
   if (left < right) {
     const pivot = arr[left]
