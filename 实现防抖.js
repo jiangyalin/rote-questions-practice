@@ -1,4 +1,5 @@
 /** 标记，需重做 */
+/** 3.21，重做正确 */
 const debounce = (fun, time = 100) => {
   let timeout = null
   return (...age) => {
