@@ -3,6 +3,7 @@
  * round 四舍五入
  * random 获取0到1的随机数
  * floor 向下取整
+ * 3.21翻了答案后重做，失误做错了
  * */
 // const shuffle = (arr = []) => {
 //   for (let i = 0; i < arr.length; i++) {
