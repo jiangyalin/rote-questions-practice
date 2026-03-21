@@ -1,4 +1,5 @@
 /** 标记，需重做 */
+/** 标记3.21查看答案后重做成功 */
 const reverse = (tree = {}) => {
   if (tree === null) return null
   const queue = [tree]
